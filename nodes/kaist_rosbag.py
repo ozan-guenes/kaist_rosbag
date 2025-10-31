@@ -24,7 +24,7 @@ class RosbagRecord:
 
         self.trigger_topic_name = rospy.get_param('~trigger_topic_name')
         self.verbose = rospy.get_param('~verbose')
-        rospy.loginfo("trigger topic name: "+self.trigger_topic_name)
+        rospy.loginfo("Trigger topic name: "+self.trigger_topic_name)
         
         self.trigger_topic_subscriber = rospy.Subscriber(self.trigger_topic_name, State, self.trigger_subscriber_callback)
         
@@ -37,9 +37,10 @@ class RosbagRecord:
         list_output = list_cmd.stdout.read()
         retcode = list_cmd.wait()
         assert retcode == 0, "List command returned %d" % retcode
-        for str in list_output.split("\n"):
-            if (str.startswith(s)):
-                os.system("rosnode kill " + str)
+        node_list = list_output.decode('utf-8').splitlines()
+        for node_name in node_list:
+            if node_name.startswith(s):
+                os.system("rosnode kill " + node_name)
 
     def start_recording_handler(self):
         # Start recording.
@@ -47,14 +48,13 @@ class RosbagRecord:
         self.p = subprocess.Popen(command, stdin=subprocess.PIPE, shell=True, cwd=self.record_folder,
                                     executable='/bin/bash')
 
-
     def stop_recording_handler(self):
         rospy.loginfo(rospy.get_name() + ' stop recording.')
         self.terminate_ros_node("/record")
 
     def trigger_subscriber_callback(self, msg):
         if(self.verbose):
-            rospy.loginfo("Recieving trgger")
+            rospy.loginfo("Receiving trigger")
         ## Do something to the trigger variable
         self.trigger = msg.armed
         if(self.trigger == True and self.last_trigger == False):
