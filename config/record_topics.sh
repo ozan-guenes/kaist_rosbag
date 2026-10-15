@@ -14,6 +14,10 @@ rosbag record \
 /mavros/local_position/odom \
 /mavros/local_position/velocity_local \
 /mavros/setpoint_velocity/cmd_vel \
+/mavros/setpoint_position/local \
+/mavros/rc/in \
+/mavros/battery \
+/mavros/estimator_status \
 /mavros/vision_pose/pose \
 /mavros/odometry/out \
 /uav/camera/color/camera_info \
@@ -21,28 +25,41 @@ rosbag record \
 /t265/camera/odom/sample \
 /t265/vio_watchdog/state \
 /t265/vio_watchdog/healthy \
-/endo_cam/camera_info \
-/endo_cam/image_raw/compressed \
+/endoscope/camera_info \
+/endoscope/image_raw/compressed \
+/endoscope/detections \
 /tag_detections \
 /tag_detections_image/compressed \
 /docking/command \
 /docking/dock_estimate \
+/docking/dock_state \
 /docking/dock_measurement/front \
+/docking/dock_measurement/probe \
 /docking/gates \
 /docking/lock_command \
 /docking/state \
-/docking/target_pose \
+/docking/contact \
+/docking/terminal_status \
+/docking/control_status \
+/docking/flight_active \
 /docking/uav_path \
+/pid_controller/ready \
+/offboard_control/autonomy_authorized \
+/offboard_control/pilot_override \
+/target/odometry \
+/docking_estimator/diagnostics \
+/target/comparison/ema \
+/target/comparison/ema/acceleration \
+/target/comparison/cv_kalman \
+/target/comparison/cv_kalman/acceleration \
+/target/comparison/stonesoup_ekf \
+/target/comparison/stonesoup_ekf/acceleration \
+/target/comparison/stonesoup_ukf \
+/target/comparison/stonesoup_ukf/acceleration \
 /odometry/filtered \
--o ${MISSION_NAME}
-
-# /docking/uav_path \ ----
-# /docking/path_marker \
-# /docking/state_marker \
-# /docking/target_arrow \
-# /docking/target_cube \
-# /uav/arrow_marker \
-# /uav/mesh_marker \
-
-# /uav/camera/depth/camera_info \
-# /uav/camera/depth/image_raw \
+/gazebo/model_states \
+/jackal_velocity_controller/cmd_vel \
+/sitl/docking/locked \
+/sitl/docking/lock_calls \
+/kaist_rosbag/recording \
+-o "${MISSION_NAME}"

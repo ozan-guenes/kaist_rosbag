@@ -16,6 +16,7 @@ catkin_python_setup()
 
 install(PROGRAMS
   nodes/kaist_rosbag.py
+  nodes/kaist_rosbag_py3.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
 install(DIRECTORY launch/
